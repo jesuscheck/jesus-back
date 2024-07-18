@@ -874,6 +874,63 @@ export interface ApiLiveLive extends Schema.CollectionType {
   };
 }
 
+export interface ApiToolTool extends Schema.CollectionType {
+  collectionName: 'tools';
+  info: {
+    singularName: 'tool';
+    pluralName: 'tools';
+    displayName: 'Tool';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    version: Attribute.String;
+    active: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiToolsClientToolsClient extends Schema.CollectionType {
+  collectionName: 'tools_clients';
+  info: {
+    singularName: 'tools-client';
+    pluralName: 'tools-clients';
+    displayName: 'tools_client';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.String;
+    pc_one: Attribute.String;
+    pc_two: Attribute.String;
+    active: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tools-client.tools-client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tools-client.tools-client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -895,6 +952,8 @@ declare module '@strapi/types' {
       'api::bot.bot': ApiBotBot;
       'api::client.client': ApiClientClient;
       'api::live.live': ApiLiveLive;
+      'api::tool.tool': ApiToolTool;
+      'api::tools-client.tools-client': ApiToolsClientToolsClient;
     }
   }
 }

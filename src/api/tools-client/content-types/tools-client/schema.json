@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tools_clients",
+  "info": {
+    "singularName": "tools-client",
+    "pluralName": "tools-clients",
+    "displayName": "tools_client"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "string"
+    },
+    "pc_one": {
+      "type": "string"
+    },
+    "pc_two": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}
