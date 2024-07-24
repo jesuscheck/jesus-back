@@ -812,6 +812,36 @@ export interface ApiBotBot extends Schema.CollectionType {
   };
 }
 
+export interface ApiCainAccountCainAccount extends Schema.CollectionType {
+  collectionName: 'cain_accounts';
+  info: {
+    singularName: 'cain-account';
+    pluralName: 'cain-accounts';
+    displayName: 'cain-account';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    account: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cain-account.cain-account',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cain-account.cain-account',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiClientClient extends Schema.CollectionType {
   collectionName: 'clients';
   info: {
@@ -950,6 +980,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::bot.bot': ApiBotBot;
+      'api::cain-account.cain-account': ApiCainAccountCainAccount;
       'api::client.client': ApiClientClient;
       'api::live.live': ApiLiveLive;
       'api::tool.tool': ApiToolTool;
