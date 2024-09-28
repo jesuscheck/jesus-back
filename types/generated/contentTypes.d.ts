@@ -904,6 +904,74 @@ export interface ApiLiveLive extends Schema.CollectionType {
   };
 }
 
+export interface ApiPersonPerson extends Schema.CollectionType {
+  collectionName: 'people';
+  info: {
+    singularName: 'person';
+    pluralName: 'people';
+    displayName: 'person';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    age: Attribute.String;
+    skills: Attribute.JSON;
+    tasks: Attribute.Relation<
+      'api::person.person',
+      'manyToMany',
+      'api::task.task'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTaskTask extends Schema.CollectionType {
+  collectionName: 'tasks';
+  info: {
+    singularName: 'task';
+    pluralName: 'tasks';
+    displayName: 'task';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    deadline: Attribute.Date;
+    status: Attribute.String;
+    people: Attribute.Relation<
+      'api::task.task',
+      'manyToMany',
+      'api::person.person'
+    >;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiToolTool extends Schema.CollectionType {
   collectionName: 'tools';
   info: {
@@ -983,6 +1051,8 @@ declare module '@strapi/types' {
       'api::cain-account.cain-account': ApiCainAccountCainAccount;
       'api::client.client': ApiClientClient;
       'api::live.live': ApiLiveLive;
+      'api::person.person': ApiPersonPerson;
+      'api::task.task': ApiTaskTask;
       'api::tool.tool': ApiToolTool;
       'api::tools-client.tools-client': ApiToolsClientToolsClient;
     }
